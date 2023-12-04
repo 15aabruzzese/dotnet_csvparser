@@ -1,0 +1,15 @@
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/bin/Debug/net8.0/CSVParser
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/bin/Debug/net8.0/CSVParser.deps.json
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/bin/Debug/net8.0/CSVParser.runtimeconfig.json
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/bin/Debug/net8.0/CSVParser.dll
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/bin/Debug/net8.0/CSVParser.pdb
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.GeneratedMSBuildEditorConfig.editorconfig
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.AssemblyInfoInputs.cache
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.AssemblyInfo.cs
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.csproj.CoreCompileInputs.cache
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.sourcelink.json
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.dll
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/refint/CSVParser.dll
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.pdb
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/CSVParser.genruntimeconfig.cache
+/Users/andrewabruzzese/Desktop/Github/dotnet_csvparser/CSVParser/obj/Debug/net8.0/ref/CSVParser.dll
