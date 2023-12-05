@@ -12,7 +12,7 @@ namespace Tests
             var programType = typeof(Program);
 
             // Assert
-            Assert.NotNull(programType, "Program class should exist in CSVParser namespace");
+            Assert.That(programType, Is.Not.Null, "Program class should exist in CSVParser namespace");
         }
 
         [Test]
@@ -24,30 +24,33 @@ namespace Tests
         [Test]
         public void InitalizeCSVEntry()
         {
-            CSV_Entry testEntry = new CSV_Entry("First Name","Last Name","Email Address");
+            CSV_Entry testEntry = new("First Name","Last Name","Email Address");
         }
 
         [Test]
         public void EmailValidationTest()
         {
-            Assert.IsTrue(CSV_Parser.IsValidEmail("andrew.abruzzese@outlook.com"), "Testing Valid Email");
-            Assert.IsFalse(CSV_Parser.IsValidEmail("somethingsomething@giberish"), "Email without domain extension should be invalid.");
-            Assert.IsFalse(CSV_Parser.IsValidEmail("somethingsomething.giberish.com"), "Email without @ should be invalid.");
-            Assert.IsFalse(CSV_Parser.IsValidEmail("anothertestemail@giberish."), "Email with invalid domain should be invalid.");
+            Assert.Multiple(() =>
+            {
+                Assert.That(CSV_Parser.IsValidEmail("andrew.abruzzese@outlook.com"), Is.True, "Testing Valid Email");
+                Assert.That(CSV_Parser.IsValidEmail("somethingsomething@giberish"), Is.False, "Email without domain extension should be invalid.");
+                Assert.That(CSV_Parser.IsValidEmail("somethingsomething.giberish.com"), Is.False, "Email without @ should be invalid.");
+                Assert.That(CSV_Parser.IsValidEmail("anothertestemail@giberish."), Is.False, "Email with invalid domain should be invalid.");
+            });
         }
-        
+
         [Test]
         public void TestTotalInvalid()
         {
             CSV_Parser testParser = CSV_Parser.GetInstance("../../../../CSVInputDirectory/dotNetTest.csv");
-            Assert.IsTrue(testParser.getInvalidEmailTotal() == 3, "Total Invalid: "+testParser.getInvalidEmailTotal());
+            Assert.That(CSV_Parser.GetInvalidEmailTotal(), Is.EqualTo(3), "Total Invalid: "+CSV_Parser.GetInvalidEmailTotal());
         }
 
         [Test]
         public void TestTotalValid()
         {
             CSV_Parser testParser = CSV_Parser.GetInstance("../../../../CSVInputDirectory/dotNetTest.csv");
-            Assert.IsTrue(testParser.getValidEmailTotal() == 1, "Total Valid: "+testParser.getValidEmailTotal());
+            Assert.That(CSV_Parser.GetValidEmailTotal(), Is.EqualTo(1), "Total Valid: "+CSV_Parser.GetValidEmailTotal());
         }
     }
 }

@@ -1,15 +1,9 @@
 namespace CSVParser
 {
-    public class CSV_Entry
+    public class CSV_Entry(string firstName, string lastName, string email)
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public CSV_Entry(string firstName, string lastName, string email)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-        }
+        public string FirstName { get; set; } = firstName;
+        public string LastName { get; set; } = lastName;
+        public string Email { get; set; } = email;
     }
 }

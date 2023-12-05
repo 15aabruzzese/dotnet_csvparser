@@ -5,12 +5,12 @@ using System.Text.RegularExpressions;
 namespace CSVParser
 {
     //Singleton Class
-    public class CSV_Parser
+    public partial class CSV_Parser
     {
         private static CSV_Parser? parserInstance;
-        private static readonly object objLock = new object();
-        private static List<CSV_Entry> ValidListOfEmails = new List<CSV_Entry>();
-        private static List<CSV_Entry> InvalidListOfEmails = new List<CSV_Entry>();
+        private static readonly object objLock = new();
+        private static List<CSV_Entry> ValidListOfEmails = [];
+        private static List<CSV_Entry> InvalidListOfEmails = [];
         private static int totalNumberOfValidEmails = 0;
         private static int totalNumberOfInvalidEmails = 0;
 
@@ -23,7 +23,7 @@ namespace CSVParser
                 if (parserInstance == null)
                 {
                     parserInstance = new CSV_Parser();
-                    CSV_Parser.ParseCsv(filePath);
+                    ParseCsv(filePath);
                 }
                 return parserInstance;
             }
@@ -36,7 +36,7 @@ namespace CSVParser
                 return false;
 
             // Simple regex pattern for basic email validation
-            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase);
+            return MyRegex().IsMatch(email);
         }
 
         /*
@@ -49,25 +49,23 @@ namespace CSVParser
         */
         private static void ParseCsv(string filePath)
         {
-            cleanStaticParserInfo();
+            CleanStaticParserInfo();
             try
             {
-                using (var reader = new StreamReader(filePath))
+                using var reader = new StreamReader(filePath);
+                string? line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    string? line;
-                    while ((line = reader.ReadLine()) != null)
+                    var parts = line.Split(',');
+                    if (IsValidEmail(parts[2]))
                     {
-                        var parts = line.Split(',');
-                        if (IsValidEmail(parts[2]))
-                        {
-                            ValidListOfEmails.Add(new CSV_Entry(parts[0], parts[1], parts[2]));
-                            totalNumberOfValidEmails++;
-                        }
-                        else
-                        {
-                            InvalidListOfEmails.Add(new CSV_Entry(parts[0], parts[1], parts[2]));
-                            totalNumberOfInvalidEmails++;
-                        }
+                        ValidListOfEmails.Add(new CSV_Entry(parts[0], parts[1], parts[2]));
+                        totalNumberOfValidEmails++;
+                    }
+                    else
+                    {
+                        InvalidListOfEmails.Add(new CSV_Entry(parts[0], parts[1], parts[2]));
+                        totalNumberOfInvalidEmails++;
                     }
                 }
             }
@@ -77,7 +75,7 @@ namespace CSVParser
             }
         }
 
-        public void PrintValidEmails()
+        public static void PrintValidEmails()
         {
             foreach (var CSV_Entry in ValidListOfEmails)
             {
@@ -86,7 +84,7 @@ namespace CSVParser
             Console.WriteLine($"Total Number Of Valid Email Addresses: {totalNumberOfValidEmails}");
         }
 
-        public void PrintInvalidEmails()
+        public static void PrintInvalidEmails()
         {
             foreach (var CSV_Entry in InvalidListOfEmails)
             {
@@ -95,20 +93,23 @@ namespace CSVParser
             Console.WriteLine($"Total Number Of Invalid Email Addresses: {totalNumberOfInvalidEmails}");
         }
 
-        public int getValidEmailTotal(){
+        public static int GetValidEmailTotal(){
             return totalNumberOfValidEmails;
         }
 
-        public int getInvalidEmailTotal(){
+        public static int GetInvalidEmailTotal(){
             return totalNumberOfInvalidEmails;
         }
 
         //Resets/Clears static fields
-        public static void cleanStaticParserInfo(){
+        public static void CleanStaticParserInfo(){
             ValidListOfEmails.Clear();
             InvalidListOfEmails.Clear();
             totalNumberOfInvalidEmails = 0;
             totalNumberOfValidEmails = 0;
         }
+
+        [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, "en-US")]
+        private static partial Regex MyRegex();
     }
 }
